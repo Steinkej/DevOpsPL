@@ -56,7 +56,7 @@ public class Application {
                     String ibandeposit = sc.nextLine();
                     System.out.println("Wie viel möchten Sie einzahlen?");
                     double amountdeposit = sc.nextDouble();
-                    Withdraw(ibandeposit, amountdeposit);
+                    Deposit(ibandeposit, amountdeposit);
                     break;
                 case "show balance":
                     System.out.println("Wie lautet ihre Iban?");
@@ -73,9 +73,9 @@ public class Application {
         }
     }
 
-    private String Balance(String iban) {
+    public String Balance(String iban) {
         for(BankAccount account : accounts){
-            if(account.iban == iban) {
+            if(account.iban.equals(iban)) {
                 return String.valueOf(account.balance);
             }
         }
@@ -84,9 +84,9 @@ public class Application {
 
     public void Transfer(String iban1, String iban2, double amount){
         for(BankAccount account : accounts){
-            if(account.iban == iban1){
+            if(account.iban.equals(iban1)){
                 for(BankAccount account2 : accounts){
-                    if(account2.iban == iban2){
+                    if(account2.iban.equals(iban2)){
                         account.balance -= amount;
                         account2.balance += amount;
 
@@ -100,14 +100,14 @@ public class Application {
     }
     public void Withdraw(String iban, double amount){
         for(BankAccount account : accounts){
-            if(account.iban == iban){
+            if(account.iban.equals(iban)){
                 account.balance -= amount;
             }
         }
     }
     public void Deposit(String iban, double amount){
         for(BankAccount account : accounts) {
-            if (account.iban == iban) {
+            if (account.iban.equals(iban)) {
                 account.balance += amount;
             }
         }

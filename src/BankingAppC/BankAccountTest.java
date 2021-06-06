@@ -1,38 +1,54 @@
 package BankingAppC;
 import static org.junit.Assert.*;
 import org.junit.Test;
-import BankingAppC.BankAccount;
-public class BankAccountTests {
+
+
+
+public class BankAccountTest {
+    String[] args = new String[2];
+
+
     @Test
-    public void testDeposit() {
-        BankAccount bankaccount = new BankAccount();
-        bankaccount.deposit(5000);
-        assertEquals(5000, bankaccount.getBalance());
-    }
-    @Test
-    public void testWithdraw(){
-        BankAccount bankaccount = new BankAccount();
-        bankaccount.deposit(5000);
-        bankaccount.withdraw(2000);
-        assertEquals(3000, bankaccount.getBalance());
-    }
-    @Test
-    public void testWithdrawforeignCurrency() {
-        BankAccount bankaccount = new BankAccount();
+    public void testCreate() {
+        BankApp.main(args);
+        new Application();
+        Application bank = new Application();
+        bank.CreateAccount("test", "1234", 200);
+        assertEquals("200.0", bank.Balance("1234"));
     }
 
     @Test
-    public void testWithdraw(){
-        BankAccount bankaccount = new BankAccount();
-        bankaccount.deposit(5000);
-        bankaccount.withdraw(2000);
-        assertEquals(3000, bankaccount.getBalance());
+    public void testWithdraw() {
+        BankApp.main(args);
+        new Application();
+        Application bank = new Application();
+        bank.CreateAccount("test", "1234", 200);
+        bank.Withdraw("1234", 100);
+        assertEquals("100.0", bank.Balance("1234"));
     }
+
     @Test
-    public void testWithdrawforeignCurrency(){
-        BankAccount bankaccount = new BankAccount();
-        bankaccount.deposit(5000);
-        bankaccount.withdraw(2000,2);
-        assertEquals(1000, bankaccount.getBalance());
+    public void testDeposit() {
+        BankApp.main(args);
+        new Application();
+        Application bank = new Application();
+        bank.CreateAccount("test", "1234", 200);
+        bank.Deposit("1234", 100);
+        assertEquals("300.0", bank.Balance("1234"));
     }
+
+    @Test
+    public void testTransfer() {
+        BankApp.main(args);
+        new Application();
+        Application bank = new Application();
+        bank.CreateAccount("test", "1234", 200);
+        bank.CreateAccount("test1", "1235", 200);
+        bank.Transfer("1234","1235",100);
+        assertEquals("100.0", bank.Balance("1234"));
+        assertEquals("300.0", bank.Balance("1235"));
+    }
+
+
 }
+
